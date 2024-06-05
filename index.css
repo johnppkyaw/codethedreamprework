@@ -1,0 +1,20 @@
+h1 {
+  color: red;
+}
+
+h3:hover {
+  cursor: pointer;
+}
+
+#characters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+img{
+  width: 100px;
+}
+
+#characters div {
+  flex: 0 0 33.3333%;
+}
