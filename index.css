@@ -9,12 +9,22 @@ h3:hover {
 #characters {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-img{
-  width: 100px;
+.each-character {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 33.3333%;
 }
 
-#characters div {
-  flex: 0 0 33.3333%;
+.each-picture{
+  width: 200px;
+  height: 200px;
+  background: transparent no-repeat center;
+  background-size: cover;
 }

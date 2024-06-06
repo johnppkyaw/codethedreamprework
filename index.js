@@ -11,16 +11,17 @@ const hash = CryptoJS.MD5(data).toString();
 fetch(`https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
     .then(data => data.json())
     .then(result =>  {
-      console.log(result.data.results)
       result.data.results.forEach(character => {
         const charContainer = document.createElement('div');
         charContainer.setAttribute('class', 'each-character');
 
         const nameDiv = document.createElement('div');
+        nameDiv.setAttribute('class', 'character-name');
         nameDiv.innerText = character.name;
 
-        const picDiv = document.createElement('img');
-        picDiv.setAttribute('src', `${character.thumbnail.path}.${character.thumbnail.extension}`)
+        const picDiv = document.createElement('div');
+        picDiv.setAttribute('class', 'each-picture');
+        picDiv.style.backgroundImage = `url(${character.thumbnail.path}.${character.thumbnail.extension})`
 
         charContainer.appendChild(nameDiv);
         charContainer.appendChild(picDiv);
