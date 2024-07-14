@@ -1,7 +1,5 @@
-console.log('Hello World')
 import myAPIKeys from './myAPIKeys.js';
 
-console.log(myAPIKeys)
 const ts = "1";
 const data = ts + myAPIKeys.private + myAPIKeys.public;
 
