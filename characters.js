@@ -1,11 +1,14 @@
 import myAPIKeys from './myAPIKeys.js';
-console.log("loaded");
 
-const ts = "1";
+const ts = "" + Date.now();
 const data = ts + myAPIKeys.private + myAPIKeys.public;
+console.log("Timestamp: ", ts);
+console.log("Data: ", data);
 
 //creates hash using timestamp, privatekey, and publickey
 const hash = CryptoJS.MD5(data).toString();
+console.log("Hash: ", hash);
+
 console.log(`https://gateway.marvel.com/v1/public/characters?limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`);
 
 fetch(`https://gateway.marvel.com/v1/public/characters?limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
