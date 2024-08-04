@@ -1,12 +1,14 @@
 import myAPIKeys from './myAPIKeys.js';
+console.log("loaded");
 
 const ts = "1";
 const data = ts + myAPIKeys.private + myAPIKeys.public;
 
 //creates hash using timestamp, privatekey, and publickey
 const hash = CryptoJS.MD5(data).toString();
+console.log(`https://gateway.marvel.com/v1/public/characters?limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`);
 
-fetch(`https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
+fetch(`https://gateway.marvel.com/v1/public/characters?limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
     .then(data => data.json())
     .then(result =>  {
       result.data.results.forEach(character => {
@@ -31,11 +33,11 @@ fetch(`https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${myAPIKe
 
 
 
-movies.onclick = () => {
-  fetch(`https://gateway.marvel.com/v1/public/characters?ts=1&apikey=${publickey}&hash=${data}`)
-    .then(data => data.json())
-    .then(result =>  {
-      console.log(result.data.results)
-    })
-  console.log('clicked')
-}
+// movies.onclick = () => {
+//   fetch(`https://gateway.marvel.com/v1/public/characters?ts=1&apikey=${publickey}&hash=${data}`)
+//     .then(data => data.json())
+//     .then(result =>  {
+//       console.log(result.data.results)
+//     })
+//   console.log('clicked')
+// }

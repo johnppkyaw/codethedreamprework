@@ -1,5 +1,29 @@
 h1 {
   color: red;
+  text-align: center;
+}
+
+#main-page-title {
+  color: red;
+  text-align: center;
+  padding: 150px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+nav li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color:blue;
+  background-color: rgb(192, 83, 83);
+  padding: 20px;
 }
 
 h3:hover {
@@ -7,6 +31,13 @@ h3:hover {
 }
 
 #characters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#comics {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
