@@ -11,22 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(`https://gateway.marvel.com/v1/public/comics?limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
     .then(data => data.json())
     .then(result =>  {
-      result.data.results.forEach(character => {
-        const charContainer = document.createElement('div');
-        charContainer.setAttribute('class', 'each-character');
+      console.log(result.data.results);
+      result.data.results.forEach(comic => {
+        const comicContainer = document.createElement('div');
+        comicContainer.setAttribute('class', 'each-comic');
 
         const nameDiv = document.createElement('div');
-        nameDiv.setAttribute('class', 'character-name');
-        nameDiv.innerText = character.name;
+        nameDiv.setAttribute('class', 'comic-name');
+        nameDiv.innerText = comic.title;
 
         const picDiv = document.createElement('div');
         picDiv.setAttribute('class', 'each-picture');
-        picDiv.style.backgroundImage = `url(${character.thumbnail.path}.${character.thumbnail.extension})`
+        picDiv.style.backgroundImage = `url(${comic.thumbnail.path}.${comic.thumbnail.extension})`
 
-        charContainer.appendChild(nameDiv);
-        charContainer.appendChild(picDiv);
+        comicContainer.appendChild(nameDiv);
+        comicContainer.appendChild(picDiv);
 
-        comics.appendChild(charContainer);
+        comics.appendChild(comicContainer);
       })
     })
 })

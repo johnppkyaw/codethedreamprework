@@ -31,6 +31,12 @@ h3:hover {
   cursor: pointer;
 }
 
+#letters {
+  display: flex;
+  text-align: center;
+  width: 80%;
+}
+
 #characters {
   display: flex;
   flex-wrap: wrap;
@@ -45,7 +51,7 @@ h3:hover {
   align-items: center;
 }
 
-.each-character {
+.each-character, .each-comic {
   width: 200px;
   height: 200px;
   display: flex;
