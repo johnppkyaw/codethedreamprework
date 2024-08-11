@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
               const nameDiv = document.createElement('div');
               nameDiv.setAttribute('class', 'comic-name');
-              nameDiv.innerText = comic.name;
+              nameDiv.innerText = comic.title;
 
               const picDiv = document.createElement('div');
               picDiv.setAttribute('class', 'each-picture');
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
               comicContainer.appendChild(nameDiv);
               comicContainer.appendChild(picDiv);
 
-              comics.appendChild(charContainer);
+              comics.appendChild(comicContainer);
             })
           })
         return;
