@@ -1,6 +1,8 @@
-#### Download the repo
+#### Download/Clone the repo
 
-#### npm install inside the folder
+#### cd into the project folder
+
+#### npm install inside the folder to install CryptoJS
 
 #### Get your Marvel public and private api key.
 ## By Signing up an account at https://developer.marvel.com/
