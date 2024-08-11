@@ -12,6 +12,7 @@ fetch(`https://gateway.marvel.com/v1/public/characters?orderBy=name&limit=20&ts=
       let totalChar;
       let currOffset;
       let startsWith;
+      let currLetter;
 
       //After loading the characters, add the buttons
       const lettersDiv = document.getElementById('letters');
@@ -21,7 +22,8 @@ fetch(`https://gateway.marvel.com/v1/public/characters?orderBy=name&limit=20&ts=
         eachLetter.setAttribute('class', 'each-letter');
         eachLetter.innerText = letter;
         eachLetter.onclick = (e) => {
-          renderList(e.target.innerText);
+          startsWith = e.target.innerText.toLowerCase();
+          renderList(startsWith);
         }
         lettersDiv.appendChild(eachLetter);
       }
@@ -47,44 +49,56 @@ fetch(`https://gateway.marvel.com/v1/public/characters?orderBy=name&limit=20&ts=
       })
 
       function renderList(buttonClicked) {
-        let urlString = "";
+        let urlString;
+        if(!currLetter) {
+          urlString = `https://gateway.marvel.com/v1/public/characters?orderBy=name&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
+        } else {
+          urlString = `https://gateway.marvel.com/v1/public/characters?orderBy=name&nameStartsWith=${currLetter}&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
+        }
+
         //previous button
-        if(buttonClicked === 'Prev') {
+        if(buttonClicked === 'prev') {
           //if currOffset - 10 >= 0
-            //update currOffset
+          if(currOffset - 20 >= 0) {
+            //update currOffset and add to urlString
+            currOffset = currOffset - 20;
+            urlString += `&offset=${currOffset}`;
             //fetch and reload result
-          console.log('Prev clicked')
+            fetchAndReload(urlString);
+          }
           return;
         }
 
         //next button
-        if(buttonClicked === 'Next') {
-          //if currOffset + 20 <= totalChar
-            //update currOffset
+        if(buttonClicked === 'next') {
+          //if currOffset + 20 < totalChar
+          if(currOffset + 20 < totalChar) {
+            //update currOffset and add to urlString
+            currOffset = currOffset + 20;
+            urlString += `&offset=${currOffset}`;
             //fetch and reload result
-          console.log('Next clicked')
+            fetchAndReload(urlString);
+          }
           return;
         }
-
         //neither next or prev
-          //update startsWith
-          startsWith = buttonClicked.toLowerCase();
-          //update totalChar
-          totalChar = 0;
+          currLetter = buttonClicked;
           //update currOffset to 0;
           currOffset = 0;
+          //update urlString
+          urlString = `https://gateway.marvel.com/v1/public/characters?orderBy=name&nameStartsWith=${currLetter}&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
           //fetch and reload
-          fetchAndReload(url);
+          fetchAndReload(urlString);
           return;
       }
 
       function fetchAndReload(url) {
+        characters.innerHTML = "";
         fetch(url)
           .then(data => data.json())
           .then(result => {
-            character.innerHTML = "";
+            //update total number of data with the result.data.total;
             totalChar = result.data.total;
-            currOffset = result.data.offset;
             result.data.results.forEach(character => {
               const charContainer = document.createElement('div');
               charContainer.setAttribute('class', 'each-character');
@@ -103,5 +117,6 @@ fetch(`https://gateway.marvel.com/v1/public/characters?orderBy=name&limit=20&ts=
               characters.appendChild(charContainer);
             })
           })
+        return;
       }
     })
