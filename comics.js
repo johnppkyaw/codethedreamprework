@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //creates hash using timestamp, privatekey, and publickey
   const hash = CryptoJS.MD5(data).toString();
 
-  fetch(`https://gateway.marvel.com/v1/public/comics?limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
+  fetch(`https://gateway.marvel.com/v1/public/comics?orderBy=name&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
     .then(data => data.json())
     .then(result =>  {
       let totalChar;
