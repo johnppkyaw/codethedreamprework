@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //creates hash using timestamp, privatekey, and publickey
   const hash = CryptoJS.MD5(data).toString();
 
-  fetch(`https://gateway.marvel.com/v1/public/comics?orderBy=name&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
+  fetch(`https://gateway.marvel.com/v1/public/comics?orderBy=title&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`)
     .then(data => data.json())
     .then(result =>  {
       let totalChar;
@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
       function renderList(buttonClicked) {
         let urlString;
         if(!currLetter) {
-          urlString = `https://gateway.marvel.com/v1/public/comics?orderBy=name&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
+          urlString = `https://gateway.marvel.com/v1/public/comics?orderBy=title&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
         } else {
-          urlString = `https://gateway.marvel.com/v1/public/comics?orderBy=name&nameStartsWith=${currLetter}&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
+          urlString = `https://gateway.marvel.com/v1/public/comics?orderBy=title&titleStartsWith=${currLetter}&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
         }
 
         //previous button
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
           //update currOffset to 0;
           currOffset = 0;
           //update urlString
-          urlString = `https://gateway.marvel.com/v1/public/comics?orderBy=name&nameStartsWith=${currLetter}&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
+          urlString = `https://gateway.marvel.com/v1/public/comics?orderBy=title&titleStartsWith=${currLetter}&limit=20&ts=${ts}&apikey=${myAPIKeys.public}&hash=${hash}`;
           //fetch and reload
           fetchAndReload(urlString);
           return;
